@@ -5,8 +5,7 @@
     <ul>
         {% for upload in records %}
             <li>
-                <p>{{upload.date_added|date:'M d, Y H:i' }}</p>
-                <p> uploadFileName--need modified</p> - a link for download
+                <p>{{upload.date_added|date:'M d, Y H:i' }}</p> - {{upload.userfiles}} - <a href="{% url 'forecast:item' upload.id %}">detailed description</a> 
             </li>
             {% empty %}
             <li>
