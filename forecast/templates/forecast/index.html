@@ -1,0 +1,18 @@
+{% extends "users/base.html" %}
+
+{% block content %}
+    <p>Forecasts records:</p>
+    <ul>
+        {% for upload in records %}
+            <li>
+                <p>{{upload.date_added|date:'M d, Y H:i' }}</p>
+                <p> uploadFileName--need modified</p> - a link for download
+            </li>
+            {% empty %}
+            <li>
+                There are no records for you.
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

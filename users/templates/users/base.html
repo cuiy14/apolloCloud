@@ -6,7 +6,8 @@
     <a href="{% url 'users:index' %}">Main page</a> -
     {% if user.is_authenticated %}
         Hello, {{user.username}} - 
-        <a href="{% url 'users:logout' %}">Log out</a>
+        <a href="{% url 'users:logout' %}">Log out</a> - 
+        <a href="{% url 'forecast:upload' %}">start a new forecast item</a>
     {% else %}
         <a href="{% url 'users:login' %}">Log in</a> -
         <a href="{% url 'users:register' %}">Register</a>

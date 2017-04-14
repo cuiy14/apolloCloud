@@ -1,0 +1,15 @@
+<! DOCTYPE  html>
+
+<!-- this file is the page for upload new data file for forecasting -->
+{% extends "users/base.html" %}
+
+{% block content %}
+
+    <h1>start a new forecast item</h1>
+    <form action="{% url 'forecast:upload' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ uploadForm.as_p }}
+    <button name="Submit">ok!</button>
+    </form>
+
+{% endblock content %}
