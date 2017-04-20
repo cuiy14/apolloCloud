@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     #the apps of drift
     'users',
     'forecast',
+    # the third party app
+    'bootstrap3',
 ]
 
 MIDDLEWARE = [
@@ -127,3 +129,7 @@ STATIC_URL = '/static/'
 #the settings of drift
 LOGIN_URL = '/users/login'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'upload/') 
+#the settings of bootstrap3
+BOOTSTRAP3 = {
+    'include_jquery':True,
+}

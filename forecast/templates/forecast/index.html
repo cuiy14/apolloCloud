@@ -1,5 +1,6 @@
 {% extends "users/base.html" %}
 
+{% comment "primary codes" %}
 {% block content %}
     <p>Forecasts records:</p>
     <ul>
@@ -17,3 +18,29 @@
     </ul>
 
 {% endblock %}
+{% endcomment %}
+
+{% load bootstrap3 %}
+
+{% block header %}
+    <h2>Forecasts records</h2>
+{% endblock header%}
+
+{% block content %}
+<ul>
+{% for upload in records %}
+    <li>
+    <h3>
+    <a href="{% url 'forecast:itemdownload' upload.id %}">{{upload.userfiles}}</a> -
+     <a href="{% url 'forecast:item' upload.id %}">detailed description</a> 
+    </h3>
+    </li> 
+{% empty %}
+    <li>There are no records for you.</li>
+{% endfor %}
+</ul>
+
+<h3><a href="{% url 'forecast:upload' %}">Start a new forecast item</a></h3>
+
+
+{% endblock content %}
