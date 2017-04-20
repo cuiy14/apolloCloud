@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import unicode_literals
+
+import os
+
 from django.shortcuts import render
-from django.http import HttpResponseRedirect, HttpResponse,Http404
+from django.http import HttpResponseRedirect, HttpResponse,Http404, StreamingHttpResponse
 from django.core.urlresolvers import reverse
 from django import forms
 from django.contrib.auth.decorators import login_required
@@ -45,3 +48,23 @@ def item(request, upload_id):
 
     context = {'upload':upload}
     return render(request, 'forecast/item.html',context)
+
+@login_required #this is not necessary
+def itemdownload(request,upload_id):
+    def file_iterator(file_name,chunk_size=512):
+        with open(file_name) as f:
+            while True:
+                c = f.read(chunk_size)
+                if c:
+                    yield c
+                else:
+                    break
+
+    upload = Upload.objects.get(id=upload_id)
+    filename='upload' + os.sep + str(upload.userfiles)  #this may needed changing if the location of files downloading is varing
+    response = StreamingHttpResponse(file_iterator(filename))
+    response['Content-Type'] = 'application/octet-stream'
+    response['Content--Disposition'] = 'attachment;filename="{0}"'.format(filename)
+
+    return response
+
