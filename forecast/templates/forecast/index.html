@@ -6,7 +6,7 @@
     <ul>
         {% for upload in records %}
             <li>
-                <p>{{upload.date_added|date:'M d, Y H:i' }}</p> - 
+                <p>{{ upload.date_added|date:'M d, Y H:i' }}</p> - 
                 <a href="{% url 'forecast:itemdownload' upload.id %}">{{upload.userfiles}}</a> - 
                 <a href="{% url 'forecast:item' upload.id %}">detailed description</a> 
             </li>
@@ -29,12 +29,15 @@
 {% block content %}
 <ul>
 {% for upload in records %}
-    <li>
-    <h3>
-    <a href="{% url 'forecast:itemdownload' upload.id %}">{{upload.userfiles}}</a> -
+    <div class="panel panel-info">
+         <div class="panel-heading">
+           <h3 class="panel-title">{{ upload.date_added|date:'M d, Y H:i' }}</h3>
+         </div>
+         <div class="panel-body">
+           <a href="{% url 'forecast:itemdownload' upload.id %}">{{upload.userfiles|slugify|slice:"6:"}}</a> -    {#temporary, need to change#}
      <a href="{% url 'forecast:item' upload.id %}">detailed description</a> 
-    </h3>
-    </li> 
+         </div>
+    </div>
 {% empty %}
     <li>There are no records for you.</li>
 {% endfor %}
@@ -44,3 +47,4 @@
 
 
 {% endblock content %}
+

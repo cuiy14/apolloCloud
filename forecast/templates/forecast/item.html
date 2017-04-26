@@ -1,9 +1,19 @@
 {% extends "users/base.html" %}
-
+{% load bootstrap3 %}
 {% block content %}
 
-    <p>{{upload.userfiles}}</p>
-    <p>{{upload.date_added}}</p>
-    <p><em>some other detailed descriptions for this forecast info, including the upload file, forecast parameters, the download link of both upload file and download file, & the visualized plot of the data</em></p>
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">{{upload.date_added}}</div>
+  <div class="panel-body">
+    <p><p><em>some other detailed descriptions for this forecast info, including the upload file, forecast parameters, the download link of both upload file and download file, & the visualized plot of the data</em></p></p>
+  </div>
 
+  <!-- List group -->
+  <ul class="list-group">
+    <li class="list-group-item">Upload File : {{upload.userfiles|slugify|slice:"6:"}}</li>
+    <li class="list-group-item">Forecast Period : {{upload.forecastperiod}}</li>
+    <li class="list-group-item">Forecast Method : {{upload.forecastmethod}}</li>
+  </ul>
+</div>
 {% endblock content %}

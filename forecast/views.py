@@ -45,7 +45,7 @@ def item(request, upload_id):
     upload = Upload.objects.get(id=upload_id)
     if upload.owner != request.user:
         raise Http404
-
+    
     context = {'upload':upload}
     return render(request, 'forecast/item.html',context)
 

@@ -6,5 +6,5 @@ class UploadForm(forms.ModelForm):
     """the form for upload files"""
     class Meta:
         model = Upload
-        fields = ['userfiles']
+        fields = ['userfiles','forecastperiod','forecastmethod']
         labels = {'text': 'upload *.csv file'}
