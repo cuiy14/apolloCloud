@@ -18,6 +18,7 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^users/', include('users.urls', namespace='users')),
+    #the default app is users
+    url(r'', include('users.urls', namespace='users')),
     url(r'^forecast/', include('forecast.urls', namespace='forecast')),
 ]
