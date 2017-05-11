@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     #the apps of drift
     'users',
     'forecast',
+    'prophetMethod',
     # the third party app
     'bootstrap3',
 ]

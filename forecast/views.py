@@ -13,6 +13,8 @@ from django.contrib.auth.decorators import login_required
 from forecast.models import Upload
 from forecast.forms import UploadForm
 
+from prophetMethod.mps import *
+
 # Create your views here.
 
 @login_required
