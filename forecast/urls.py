@@ -13,4 +13,6 @@ urlpatterns=[
     url(r'^item/(?P<upload_id>\d+)/$', views.item, name='item'),
     #the link for download the primary data file
     url(r'^itemdownload/(?P<upload_id>\d+)/$', views.itemdownload, name='itemdownload'),
+    # the link for downloading the result file
+    url(r'^resultFile/(?P<fileUrl>.+)/$', views.resultFile, name='resultFile'),
 ]

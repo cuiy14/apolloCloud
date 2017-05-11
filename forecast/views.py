@@ -47,8 +47,20 @@ def item(request, upload_id):
     upload = Upload.objects.get(id=upload_id)
     if upload.owner != request.user:
         raise Http404
-    
-    context = {'upload':upload}
+    # do the calculation
+    day = 0
+    method = "mps"
+    if upload.forecastperiod == "s":
+        day = 1
+    elif upload.forecastperiod == "m":
+        day = 7
+    else:
+        day = 14
+    dataJson = forecast_more(upload.firstDay, day,"upload/"+str(upload.userfiles), "upload/"+str(upload.userfiles)+"_result.csv")
+    dataJson = json.loads(dataJson)
+    resultUrl = "http://localhost:8000/forecast/resultFile/upload/"+str(upload.userfiles)+"_result.csv"
+    #resultDownUrlHead = "forecast/resultDownload/"
+    context = {'upload':upload, 'dataJson':dataJson, 'resultUrl':resultUrl,'userfiles':str(upload.userfiles)}
     return render(request, 'forecast/item.html',context)
 
 @login_required #this is not necessary
@@ -67,6 +79,23 @@ def itemdownload(request,upload_id):
     response = StreamingHttpResponse(file_iterator(filename))
     response['Content-Type'] = 'application/octet-stream'
     response['Content--Disposition'] = 'attachment;filename="{0}"'.format(filename)
+
+    return response
+
+@login_required
+def resultFile(request, fileUrl):
+    def file_iterator(file_name,chunk_size=512):
+        with open(file_name) as f:
+            while True:
+                c = f.read(chunk_size)
+                if c:
+                    yield c
+                else:
+                    break
+
+    response = StreamingHttpResponse(file_iterator(fileUrl))
+    response['Content-Type'] = 'application/octet-stream'
+    response['Content--Disposition'] = 'attachment;filename="{0}"'.format(fileUrl)
 
     return response
 

@@ -39,7 +39,8 @@ class Upload(models.Model):
                                       choices=FORECASTMETHOD, blank=False,
                                       default='ann')
     userfiles = models.FileField(upload_to=user_directory_path)
-    uploadName = models.CharField(user_file_name) # the name of user uoload file
+    uploadName = models.CharField("Upload File Name", max_length=100) # the name of user uoload file
+    firstDay = models.CharField("First Day for forecasting (example:2014/10/20)", max_length=20)
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):

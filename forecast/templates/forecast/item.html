@@ -11,9 +11,15 @@
 
   <!-- List group -->
   <ul class="list-group">
-    <li class="list-group-item">Upload File : {{upload.userfiles|slugify|slice:"6:"}}</li>
+    <li class="list-group-item">Upload File : {{upload.uploadName}}</li>
+    <li class="list-group-item">First Day for forecasting : {{ upload.firstDay }}</li>
     <li class="list-group-item">Forecast Period : {{upload.forecastperiod}}</li>
     <li class="list-group-item">Forecast Method : {{upload.forecastmethod}}</li>
+    <li class="list-group-item">Result file : <a href={{ resultUrl }}> downloading result file</a></li>
   </ul>
 </div>
+    <h3> result file content</h3>
+    {%  for line in dataJson %}
+        <li> {{ line }}</li>
+    {% endfor %}
 {% endblock content %}
